@@ -5,9 +5,6 @@ __pycache__/
 venv/
 .venv/
 
-# Credentials
-.env
-
 # IDE
 .vscode/
 .idea/
