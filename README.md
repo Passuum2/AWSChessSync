@@ -1,5 +1,5 @@
 ## ChessSync
-Chess Sync is a full-stack web analytics platform built with Python (Flask), MySQL, and Bootstrap. It imports, normalizes, and indexes a database of World Chess Championship games from 2000 to 2025, exposing the data through APIs and a responsive dashboard that aggregates and displays player statistics analysis.
+Full-stack chess web app built with Flask & MySQL — Chess.com API integration, player head-to-head search, championship game database, and PGN downloads with an interactive board
 
 ## Contributors
 NotSrihan - https://github.com/NotSrihan
