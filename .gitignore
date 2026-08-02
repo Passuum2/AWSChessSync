@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+
+# Credentials / secrets
+.env
+sqlTools/SQLLogin*
+
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store

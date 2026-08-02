@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <meta charset="UTF-8">
+    <title>{{ name.title() }}'s Game Archive</title>
+    <style>
+        body { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+        h1 { margin-bottom: 0.5rem; }
+        ul { list-style: none; padding: 0; }
+        li { border-bottom: 1px solid #ccc; }
+        a.month {
+            display: block;
+            padding: 0.75rem 0.5rem;
+            text-decoration: none;
+            color: inherit;
+        }
+        a.month:hover { background: #f5f5f5; }
+        a.nav { display: inline-block; margin-top: 1rem; margin-right: 1rem; }
+    </style>
+</head>
+<body>
+    <h1>{{ name.title() }}'s Game Archive</h1>
+    <a class="nav" href="/">Home</a>
+    <a class="nav" href="/player/{{ name }}">Back</a>
+    <br>
+    <br>
+    <form action="/search-player" method="GET">
+        <input type="hidden" name="name" value="{{ name }}">
+
+        <label for="player">Enter Another Chess Username:</label>
+        <input
+            type="text"
+            name="api_player_search"
+            required>
+
+        <button type="submit">Search</button>
+    </form>
+
+    {% if months %}
+        <ul>
+            {% for m in months %}
+            <li>
+                <a class="month" href="{{ url_for('player_games', name=name, year=m.year, month=m.month) }}">
+                    {{ m.month }} / {{ m.year }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No archives found for {{ name }}.</p>
+    {% endif %}
+
+    <a class="nav" href="/">Home</a>
+    <a class="nav" href="/player/{{ name }}">Back</a>
+</body>
+</html>

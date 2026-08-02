@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chessboard-1.0.0.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <meta charset="UTF-8">
+    <title>{{ game.white }} VS {{ game.black}} - {{game.date}}</title>
+</head>
+<style>
+.game-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 30px;
+    width: fit-content;
+    margin: 20px auto;
+}
+
+.board-column {
+    width: 500px;
+    flex: none;
+}
+
+#board {
+    width: 500px;
+}
+
+.moves-panel {
+    width: 250px;
+    max-height: 500px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px 15px;
+    box-sizing: border-box;
+}
+
+.moves-panel h3 {
+    margin-top: 0;
+}
+
+#moves {
+    line-height: 1.8;
+}
+
+.move {
+    cursor: pointer;
+    padding: 2px 3px;
+    border-radius: 3px;
+}
+
+.move:hover {
+    background-color: #e8e8e8;
+}
+
+.move.highlight {
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.board-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.buttons {
+    text-align: right;
+}
+
+.highlight {
+    background-color: yellow;
+}
+</style>
+<body>
+    <h1>{{ game.white }} VS {{ game.black}} - {{game.date}}</h1>
+
+    <br>
+    <div class="game-container">
+        <!-- Board + controls column -->
+        <div class="board-column">
+            <div id="board"></div>
+
+            <div class="board-footer">
+                <form action="{{ url_for('utilities_bp.download_game') }}" method="post" style="display:inline;">
+                    <input type="hidden" name="event" value="{{ game.event }}">
+                    <input type="hidden" name="site" value="{{ game.site }}">
+                    <input type="hidden" name="date" value="{{ game.date }}">
+                    <input type="hidden" name="round" value="{{ game.round }}">
+                    <input type="hidden" name="white" value="{{ game.white }}">
+                    <input type="hidden" name="black" value="{{ game.black }}">
+                    <input type="hidden" name="result" value="{{ game.result }}">
+                    <input type="hidden" name="eco" value="{{ game.eco }}">
+                    <input type="hidden" name="moves" value="{{ game.PGN_Moves }}">
+                    <button type="submit">Download Game</button>
+                </form>
+
+                <div class="buttons">
+                    <button onclick="prevMove()">Previous</button>
+                    <button onclick="nextMove()">Next</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Moves Panel -->
+        <div class="moves-panel">
+            <h3>Position:</h3>
+            <span id="moves"> </span>
+            <P>{{ game.result }}</P>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="{{ url_for('static', filename='js/chessboard-1.0.0.min.js') }}"></script>
+
+    <a class="nav" href="/">Home</a>
+    <a class="nav" href="javascript:history.back()">Back</a>
+    <script>
+    const fens = {{ game["fen"] | tojson | safe }};
+    const moves = {{ game["moves"] | tojson | safe }};
+    let i = 0;
+
+    updateMove();
+
+    function nextMove() {
+        if(i < fens.length - 1) {
+            i++;
+            board.position(fens[i]);
+            updateMove();
+        }
+    }
+
+    function prevMove() {
+        if (i > 0) {
+            i--;
+            board.position(fens[i]);
+            updateMove();
+        }
+    }
+
+    function updateMove() {
+        let text = "";
+
+        for (let j = 1; j < moves.length; j++) {
+            const isWhiteMove = (j % 2 === 1);
+            const moveNumber = Math.ceil(j / 2);
+
+            if (isWhiteMove) {text += `${moveNumber}. `;}
+
+            text += `
+                <span
+                    class="move ${j === i ? 'highlight' : ''}"
+                    data-index="${j}">
+                    ${moves[j]}
+                </span>
+            `;
+            const isBlackMove = (j % 2 === 0);
+            const isLastMove = (j === moves.length - 1);
+            if (isBlackMove || isLastMove) {text += "<br>";}
+        }
+        document.getElementById("moves").innerHTML = text;
+
+        document.querySelectorAll(".move").forEach(move => {
+            move.addEventListener("click", function () {
+                i = Number(this.dataset.index);
+                board.position(fens[i]);
+                updateMove();
+            });
+        });
+    }
+
+
+    const board = Chessboard('board', {
+        draggable: false,
+        position: fens[i],
+        pieceTheme: function(piece) {
+            return "/static/img/chesspieces/wikipedia/" + piece + ".png";
+        }
+    });
+    </script>
+</body>
+</html>

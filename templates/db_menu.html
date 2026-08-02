@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Database - ChessSync</title>
+</head>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <style>
+        body { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+        h1 { margin-bottom: 0.5rem; }
+        ul { list-style: none; padding: 0; }
+        li { border-bottom: 1px solid #ccc; }
+        a.year {
+            display: block;
+            padding: 0.75rem 0.5rem;
+            text-decoration: none;
+            color: inherit;
+        }
+        a.year:hover { background: #f5f5f5; }
+        a.nav { display: inline-block; margin-top: 1rem; margin-right: 1rem; }
+    </style>
+</head>
+<body>
+
+<h1>Database</h1>
+
+<a href="/">
+    Home
+</a>
+
+<ul>
+    {% for y in years %}
+        <li>
+            <a class="year" href="{{ url_for('db_championship', year=y) }}">
+                {{ y }}
+            </a>
+        </li>
+     {% endfor %}
+</ul>
+
+<a href="/">
+    Home
+</a>
+
+
+</body>
+</html>

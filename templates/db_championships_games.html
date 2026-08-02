@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> {{ year }} - {{ championships }} </title>
+</head>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <style>
+        body { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+        .game { border-bottom: 1px solid #ccc; padding: 1rem 1.5; }
+        .game dl {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            row-gap: 0.25rem;
+            column-gap: 0.5rem;
+            margin: 0;
+        }
+        .game dt { font-weight: bold; }
+        .game dd { margin: 0; }
+        .moves { font-family: monospace; word-break: break-word; }
+        a.download, a.nav { display: inline-block; margin-top: 0.5rem; margin-right: 1rem; }
+                .nav-bar {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-bar form {
+            margin: 0;
+        }
+    </style>
+    </style>
+</head>
+<body>
+
+<h1>{{ year }} - {{ championships }}</h1>
+
+    <div class="nav-bar">
+        <a class="nav" href="/">Home</a>
+        <a class="nav" href="/db/championship/ {{ year }}">Back</a>
+        <form action="{{ url_for('utilities_bp.download_pgn') }}" method="POST">
+            <input type="hidden" name="games" value='{{ games|tojson }}'>
+            <button type="submit">
+                Download All Games
+            </button>
+        </form>
+    </div>
+
+<ul>
+        {% for game in games %}
+        <div class="game">
+            <dl>
+                <dt>Event</dt><dd>{{ game.event }}</dd>
+                <dt>Site</dt><dd>{{ game.site }}</dd>
+                <dt>Date</dt><dd>{{ year }}</dd>
+                <dt>Round</dt><dd>{{ game.round }}</dd>
+                <dt>White</dt><dd>{{ game.white }}</dd>
+                <dt>Black</dt><dd>{{ game.black }}</dd>
+                <dt>Result</dt><dd>{{ game.result }}</dd>
+                <dt>ECO</dt><dd>{{ game.eco }}</dd>
+                <dt>Moves</dt><dd class="moves">{{ game.moves }}</dd>
+            </dl>
+        <br>
+	<form action="{{ url_for('utilities_bp.download_game') }}" method="post" style="display:inline;">
+        <input type="hidden" name="event" value="{{ game.event }}">
+        <input type="hidden" name="site" value="{{ game.site }}">
+    	<input type="hidden" name="date" value="{{ year }}">
+    	<input type="hidden" name="round" value="{{ game.round }}">
+    	<input type="hidden" name="white" value="{{ game.white }}">
+    	<input type="hidden" name="black" value="{{ game.black }}">
+        <input type="hidden" name="result" value="{{ game.result }}">
+        <input type="hidden" name="eco" value="{{ game.eco }}">
+        <input type="hidden" name="moves" value="{{ game.moves }}">
+   	 <button type="submit">Download Game</button>
+	</form>
+
+    <form action="{{ url_for('game_display') }}" method="post" style="display:inline;">
+        <input type="hidden" name="name" value="{{ championships }}">
+        <input type="hidden" name="event" value="{{ game.event }}">
+        <input type="hidden" name="site" value="{{ game.site }}">
+    	<input type="hidden" name="date" value="{{ year }}">
+    	<input type="hidden" name="round" value="{{ game.round }}">
+    	<input type="hidden" name="white" value="{{ game.white }}">
+    	<input type="hidden" name="black" value="{{ game.black }}">
+        <input type="hidden" name="result" value="{{ game.result }}">
+        <input type="hidden" name="eco" value="{{ game.eco }}">
+        <input type="hidden" name="moves" value="{{ game.moves }}">
+        <input type="hidden" name="game_type" value="{{ db }}">
+   	 <button type="submit">View Game</button>
+	</form>
+        </div>
+    {% endfor %}
+</ul>
+
+<a href="/"> Home </a>
+<a href="/db/championship/ {{ year }}"> Back </a>
+
+</body>
+</html>

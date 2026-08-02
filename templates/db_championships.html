@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> {{ year }} - Championships </title>
+</head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <style>
+        body { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+        h1 { margin-bottom: 0.5rem; }
+        ul { list-style: none; padding: 0; }
+        li { border-bottom: 1px solid #ccc; }
+        a.championships {
+            display: block;
+            padding: 0.75rem 0.5rem;
+            text-decoration: none;
+            color: inherit;
+        }
+        a.championships:hover { background: #f5f5f5; }
+        a.nav { display: inline-block; margin-top: 1rem; margin-right: 1rem; }
+    </style>
+</head>
+<body>
+
+<h1>{{ year }} - Championships </h1>
+
+<ul>
+        {% for id, c in championships %}
+        <li>
+            <a class="championships"
+            href="{{ url_for('db_championship_games', year=year, championship=c, id=id) }}">
+                {{ c }}
+            </a>
+        </li>
+        {% endfor %}
+</ul>
+
+
+<a href="/" style="margin-right: 1rem;"> Home </a>
+<a href="/db/championship"> Back </a>
+
+</body>
+</html>

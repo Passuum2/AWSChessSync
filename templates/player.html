@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>{{ player["username"] }} - ChessSync</title>
+</head>
+
+<body>
+
+<h1>ChessSync Player Profile</h1>
+
+<hr>
+
+<h2>{{ player["username"].title() }}</h2>
+
+<p>
+    Name:
+    {{ player.get("name", "Not Provided") }}
+</p>
+
+{% if player.get("title") %}
+<p>
+    Title:
+    {{ player["title"] }}
+</p>
+{% endif %}
+
+<p>
+    Country:
+    {{ player.get("flag", "Unknown") }}
+</p>
+
+<p>
+    Followers:
+    {{ player.get("followers", 0) }}
+</p>
+
+<p>
+    Status:
+    {{ player.get("status", "Unknown") }}
+</p>
+
+
+<hr>
+
+<h2>Ratings</h2>
+
+
+<!-- Bullet -->
+{% if stats.get("chess_bullet") %}
+
+<h3>Bullet</h3>
+
+<p>
+    Rating:
+    {{ stats["chess_bullet"]["last"]["rating"] }}
+</p>
+
+<p>
+    Wins:
+    {{ stats["chess_bullet"]["record"]["win"] }}
+</p>
+
+<p>
+    Losses:
+    {{ stats["chess_bullet"]["record"]["loss"] }}
+</p>
+
+<p>
+    Draws:
+    {{ stats["chess_bullet"]["record"]["draw"] }}
+</p>
+
+<hr>
+
+{% endif %}
+
+
+
+<!-- Blitz -->
+{% if stats.get("chess_blitz") %}
+
+<h3>Blitz</h3>
+
+<p>
+    Rating:
+    {{ stats["chess_blitz"]["last"]["rating"] }}
+</p>
+
+<p>
+    Wins:
+    {{ stats["chess_blitz"]["record"]["win"] }}
+</p>
+
+<p>
+    Losses:
+    {{ stats["chess_blitz"]["record"]["loss"] }}
+</p>
+
+<p>
+    Draws:
+    {{ stats["chess_blitz"]["record"]["draw"] }}
+</p>
+
+<hr>
+
+{% endif %}
+
+
+
+<!-- Rapid -->
+{% if stats.get("chess_rapid") %}
+
+<h3>Rapid</h3>
+
+<p>
+    Rating:
+    {{ stats["chess_rapid"]["last"]["rating"] }}
+</p>
+
+<p>
+    Wins:
+    {{ stats["chess_rapid"]["record"]["win"] }}
+</p>
+
+<p>
+    Losses:
+    {{ stats["chess_rapid"]["record"]["loss"] }}
+</p>
+
+<p>
+    Draws:
+    {{ stats["chess_rapid"]["record"]["draw"] }}
+</p>
+
+<hr>
+
+{% endif %}
+
+<a href="/">
+    Home
+</a>
+&nbsp;&nbsp;
+<a href="/player/{{ player['username'] }}/games">
+    View Games
+</a>
+
+</body>
+</html>

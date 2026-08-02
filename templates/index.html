@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ChessSync</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <!-- Chessboard CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chessboard-1.0.0.min.css') }}">
+
+    <style>
+        .game-container {
+            position: relative;
+            width: 500px; 
+            margin: 20px auto;
+        }
+
+        .moves-panel {
+            position: absolute;
+            top: 0;
+            left: 100%;
+            margin-left: 30px;
+            width: 250px;
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px 15px;
+            box-sizing: border-box;
+        }
+        .moves-panel h3 {
+            margin-top: 0;
+        }
+
+        .buttons {
+            text-align: right;
+        }
+
+        .board-column {
+            width: 500px;
+            flex: none;
+        }
+
+        .board-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .buttons {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>ChessSync</h1>
+    </header>
+
+    <main>
+
+        <!-- Search Player -->
+        <form action="/search" method="GET">
+            <label for="player">Enter Chess.com Username:</label>
+            <input
+                type="text"
+                name="api_search"
+                placeholder="e.g., MagnusCarlsen"
+                required>
+
+            <button type="submit">Search</button>
+        </form>
+
+        <br>
+
+        <!-- Database -->
+        <h2 style="text-align:center; margin-bottom:2rem;">
+            <a href="/db/championship" class="data-button">
+                Championship Database
+            </a>
+            <br>
+        </h2>
+
+        <!-- Chess Board -->
+        <h2 style="text-align:center;">
+            Explore
+        </h2>
+
+        <div class="game-container">
+            <!-- Board + controls column -->
+            <div class="board-column">
+                <div id="board" style="width:500px;"></div>
+
+                <div class="board-footer">
+                    <button id="saveButton" type="button">
+                        Save Game
+                    </button>
+
+                    <div class="buttons">
+                        <button id="undoButton" type="button">
+                            Undo
+                        </button>
+                        <button id="clearButton" type="button">
+                            Clear
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Moves Panel -->
+            <div class="moves-panel">
+                <h3>Position</h3>
+                <div id="moves"></div>
+            </div>
+        </div>
+
+        <br>
+
+        <!-- Chess Titles -->
+        <h2>Chess Titles</h2>
+
+        <div class="title-card">
+            <h3>
+                <a href="https://www.chess.com/members/titled-players/grandmasters" target="_blank">
+                    Grand Master (GM)
+                </a>
+            </h3>
+            <p>
+                <strong>Requirements:</strong> 2500 FIDE + 3 GM norms
+                <br>
+            </p>
+        </div>
+
+        <div class="title-card">
+            <h3>
+                <a href="https://www.chess.com/members/titled-players/international-masters" target="_blank">
+                    International Master (IM)
+                </a>
+            </h3>
+            <p>
+                <strong>Requirements:</strong> 2400 FIDE + 3 IM norms
+                <br>
+            </p>
+        </div>
+
+        <div class="title-card">
+            <h3>
+                <a href="https://www.chess.com/members/titled-players/fide-masters" target="_blank">
+                    FIDE Master (FM)
+                </a>
+            </h3>
+            <p>
+                <strong>Requirements:</strong> 2300 FIDE
+                <br>
+            </p>
+        </div>
+    </main>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <footer>
+        <p>
+            2025 ChessSync.
+        </p>
+    </footer>
+
+    <!-- Search Redirect -->
+    <script>
+        function updateAction(event) {
+            event.preventDefault();
+
+            const player = document.getElementById("player").value.trim();
+            const encodedPlayer = encodeURIComponent(player.replace(/ /g, '-'));
+
+            window.location.href = `/${encodedPlayer}`;
+        }
+    </script>
+
+    <!-- Chessboard Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="{{ url_for('static', filename='js/chessboard-1.0.0.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+
+<script>
+    const game = new Chess();
+
+    function updateMoves() {
+        let html = "";
+
+        for (let i = 0; i < game.history().length; i += 2) {
+            html += `${i/2 + 1}. ${game.history()[i]}`;
+
+            if (i + 1 < game.history().length)
+                html += ` ${game.history()[i + 1]}`;
+
+            html += "<br><br>";
+        }
+
+        document.getElementById("moves").innerHTML = html;
+    }
+
+    const board = Chessboard('board', {
+        draggable: true,
+        position: 'start',
+        pieceTheme: function (piece) {
+            return "/static/img/chesspieces/wikipedia/"
+                + piece + ".png";
+        },
+        onDrop: function (source, target) {
+            let move = game.move({
+                from: source,
+                to: target,
+                promotion: 'q'
+            });
+
+            if (move === null) {
+                return 'snapback';
+            }
+
+            updateMoves();
+        },
+        onSnapEnd: function () {
+            board.position(game.fen());
+        }
+    });
+
+    document.getElementById("undoButton").onclick = function () {
+        game.undo();
+        updateMoves();
+        board.position(game.fen());
+    };
+
+    document.getElementById("clearButton").onclick = function () {
+        game.reset();
+        document.getElementById("moves").innerHTML = game.history().join(" ");
+        board.position(game.fen());
+    };
+
+    document.getElementById("saveButton").onclick = function () {
+        fetch("/saveGame", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ moves: game.history() })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Save failed");
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = "line.pgn";
+                a.click();
+                URL.revokeObjectURL(url);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    };
+</script>
+</body>
+</html>
