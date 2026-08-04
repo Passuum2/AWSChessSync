@@ -64,6 +64,7 @@ NotSrihan - https://github.com/NotSrihan
 ## Project Structure
 ```
 ChessSync.py         — main Flask app (routes for player profile, game history, championship DB, game viewer)
+Chess_db.py          — MySQL query layer (cursor/execute wrappers for pulling championship and game data)
 Chess_api.py          — Chess.com PubAPI request wrappers (profile, stats, games, archives)
 Chess_utilities.py    — Flask Blueprint with utility routes (head-to-head search, PGN downloads, save game)
 sqlTools/
