@@ -52,6 +52,7 @@ NotSrihan - https://github.com/NotSrihan
 ![Screenshot](Screenshots/DB-ChessSync-3.png)
 
 **Display Board**
+
 ![Screenshot](Screenshots/DisplayBoard-ChessSync-.png)
 
 ## Tech Stack
