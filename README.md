@@ -44,7 +44,8 @@ NotSrihan - https://github.com/NotSrihan
 ## Tech Stack
 - **Backend:** Python, Flask (Blueprint-based routing)
 - **Database:** MySQL
-- **Frontend:** HTML/CSS (custom stylesheet), chessboard.js, chess.js
+- **REST API:** Chess.com PubAPI (JSON, unauthenticated GET requests)
+- **Frontend:** HTML/CSS (custom stylesheet, chessboard.js, chess.js)
 - **Deployment (planned):** AWS RDS + EC2
 
 ## Setup & Installation
