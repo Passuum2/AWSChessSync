@@ -35,11 +35,24 @@ NotSrihan - https://github.com/NotSrihan
 
 **API Stats Page**
 
-![Screenshot](Screenshots/API-ChessSync-.png)
+![Screenshot](Screenshots/API-ChessSync-1.png)
+
+![Screenshot](Screenshots/API-ChessSync-2.png)
+
+![Screenshot](Screenshots/API-ChessSync-3.png)
+
+![Screenshot](Screenshots/API-ChessSync-4.png)
 
 **Championship Database**
 
-![Screenshot](Screenshots/DB-ChessSync-.png)
+![Screenshot](Screenshots/DB-ChessSync-1.png)
+
+![Screenshot](Screenshots/DB-ChessSync-2.png)
+
+![Screenshot](Screenshots/DB-ChessSync-3.png)
+
+**Display Board**
+![Screenshot](Screenshots/DisplayBoard-ChessSync-.png)
 
 ## Tech Stack
 - **Backend:** Python, Flask (Blueprint-based routing)
@@ -84,13 +97,13 @@ Database: [PGNMentor](https://www.pgnmentor.com/files.html#world)
 PubAPI: https://support.chess.com/en/articles/9650547-what-is-the-pubapi-and-how-do-i-use-it
 
 ## Database Setup
-The championship database is built from CSV files rather than a static schema file:
+The championship database is built from CSV files and Python scripts:
 
 1. Add your MySQL credentials to `.env` (see [Setup](#setup--installation) above) — `sqlTools/SQLlogin.py` reads them from there
 2. Run `python sqlTools/createdatabase.py` — this reads every CSV in `sqlTools/database/` and automatically creates the corresponding table structure, then imports the data
 3. To reset, run `python sqlTools/deletedatabase.py` to drop all tables, then re-run `createdatabase.py`
 
 ## Status
-This project was originally built and tested using a university-provided MySQL instance, which is no longer active. The historical championship database features are not runnable without a live MySQL connection (see Setup). The live player stats lookup (via Chess.com API) does not depend on MySQL and should still function independently.
+This project was originally built and tested using a university-provided MySQL instance, which is no longer active. The historical championship database features are not runnable without a MySQL connection (see Setup).
 
 **In progress:** Migrating the database to AWS (RDS) with the app hosted on EC2, to provide a live, publicly accessible version of the full dashboard.
