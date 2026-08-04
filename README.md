@@ -57,7 +57,7 @@ NotSrihan - https://github.com/NotSrihan
 ### Steps
 1. Clone the repo
 2. Install dependencies: `pip install -r requirements.txt`
-3. Copy `example-env` to `.env` and fill in your own MySQL credentials
+3. Copy `env.example` to `.env` and fill in your own MySQL credentials
 4. Set up the MySQL database using the `sqlTools/` scripts (see [Database Setup](#database-setup) below)
 5. Run the app: `python ChessSync.py`
 6. Visit `http://localhost:5000` in your browser
