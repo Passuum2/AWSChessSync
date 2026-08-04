@@ -6,7 +6,7 @@ NotSrihan - https://github.com/NotSrihan
 
 ## Features
 **Historical Championship Database** (MySQL-backed)
-- Imports and normalizes World Chess Championship game data (2000–2025)
+- Imports and normalizes World Chess Championship game data (1886–2024)
 - Browse by year → championship → full game list, ordered chronologically
 - Indexed database for efficient querying by player, year, and opening (ECO code)
 - Download individual games or mass-download all games in a championship as PGN
@@ -69,8 +69,8 @@ Chess_utilities.py    — Flask Blueprint with utility routes (head-to-head sear
 sqlTools/
   createdatabase.py   — builds table structure and imports data from database/*.csv
   deletedatabase.py   — drops all tables
-  SQLlogin.py          — loads MySQL credentials from .env (DB_HOST, DB_USER, DB_PASSWORD, DB_NAME) for use by the sqlTools scripts
-  database/            — source CSV files for the championship dataset
+  SQLlogin.py          — loads MySQL credentials from .env (DB_HOST, DB_USER, DB_PASSWORD, DB_NAME)
+database/            — source CSV files for the championship dataset
 templates/            — HTML views (home, player, game history, championship DB, game viewer, search results, error)
 static/css/main.css   — shared stylesheet
 static/js/            — chessboard.js and supporting scripts
