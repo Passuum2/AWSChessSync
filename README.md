@@ -31,29 +31,29 @@ NotSrihan - https://github.com/NotSrihan
 ## Screenshots
 **Home Page**
 
-![Screenshot](Screenshots/Home-ChessSync-.png)
+![Screenshot](Screenshot/Home-ChessSync-.png)
 
 **API Stats Page**
 
-![Screenshot](Screenshots/API-ChessSync-1.png)
+![Screenshot](Screenshot/API-ChessSync-1.png)
 
-![Screenshot](Screenshots/API-ChessSync-2.png)
+![Screenshot](Screenshot/API-ChessSync-2.png)
 
-![Screenshot](Screenshots/API-ChessSync-3.png)
+![Screenshot](Screenshot/API-ChessSync-3.png)
 
-![Screenshot](Screenshots/API-ChessSync-4.png)
+![Screenshot](Screenshot/API-ChessSync-4.png)
 
 **Championship Database**
 
-![Screenshot](Screenshots/DB-ChessSync-1.png)
+![Screenshot](Screenshot/DB-ChessSync-1.png)
 
-![Screenshot](Screenshots/DB-ChessSync-2.png)
+![Screenshot](Screenshot/DB-ChessSync-2.png)
 
-![Screenshot](Screenshots/DB-ChessSync-3.png)
+![Screenshot](Screenshot/DB-ChessSync-3.png)
 
 **Display Board**
 
-![Screenshot](Screenshots/DisplayBoard-ChessSync-.png)
+![Screenshot](Screenshot/DisplayBoard-ChessSync-.png)
 
 ## Tech Stack
 - **Backend:** Python, Flask (Blueprint-based routing)
