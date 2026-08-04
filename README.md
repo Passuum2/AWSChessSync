@@ -4,7 +4,7 @@
 Full-stack chess web app built with Flask & MySQL — Chess.com API integration, player head-to-head search, a browsable championship game database, and PGN downloads with an interactive board.
 
 ## Contributors
-NotSrihan - https://github.com/NotSrihan
+- [NotSrihan](https://github.com/NotSrihan)
 
 ## Features
 **Historical Championship Database** (MySQL-backed)
