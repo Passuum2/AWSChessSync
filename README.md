@@ -95,7 +95,7 @@ static/js/            — chessboard.js and supporting scripts
 ## Data Source
 Database: [PGNMentor](https://www.pgnmentor.com/files.html#world)
 
-PubAPI: https://support.chess.com/en/articles/9650547-what-is-the-pubapi-and-how-do-i-use-it
+PubAPI: [PubAPI](https://support.chess.com/en/articles/9650547-what-is-the-pubapi-and-how-do-i-use-it)
 
 ## Database Setup
 The championship database is built from CSV files and Python scripts:
