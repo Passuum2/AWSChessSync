@@ -1,5 +1,5 @@
 ## ChessSync
-**Live demo:** [98.94.94.178](http://98.94.94.178/)
+**Live demo:** [3.219.101.155](http:/3.219.101.155/)
 
 Full-stack chess web app built with Flask & MySQL — Chess.com API integration, player head-to-head search, a browsable championship game database, and PGN downloads with an interactive board.
 
@@ -107,4 +107,4 @@ The championship database is built from CSV files and Python scripts:
 3. To reset, run `python sqlTools/deletedatabase.py` to drop all tables, then re-run `createdatabase.py`
 
 ## Status
-ChessSync is deployed and live on AWS (EC2 + RDS): [98.94.94.178](http://98.94.94.178/)
+ChessSync is deployed and live on AWS (EC2 + RDS): [3.219.101.155](http://98.94.94.178/)
