@@ -107,4 +107,4 @@ The championship database is built from CSV files and Python scripts:
 3. To reset, run `python sqlTools/deletedatabase.py` to drop all tables, then re-run `createdatabase.py`
 
 ## Status
-ChessSync is deployed and live on AWS (EC2 + RDS): [3.219.101.155](http://98.94.94.178/)
+ChessSync is deployed and live on AWS (EC2 + RDS): [3.219.101.155](http://3.219.101.155/)
