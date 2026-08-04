@@ -13,9 +13,9 @@ NotSrihan - https://github.com/NotSrihan
 
 **Live Player Stats** (Chess.com API-backed)
 - Account creation date
-- Rapid/Blitz/Bullet ratings (best and current)
+- Title
+- Rapid/Blitz/Bullet ratings
 - Win/loss/draw record per time control
-- Puzzle rating
 
 **Game History & Head-to-Head Search** (Chess.com API-backed)
 - Browse a player's full monthly game archive
